@@ -21,7 +21,7 @@ This short pipeline allows the user to assess the genome assembly circumstance b
 2. A fasta file containing a genome assembly (of dubious quality most likely)
 3. The short-read library used to assemble the genome
 
-## Running the preparation steps
+## Running the data processing pipeline
 
 ### 1. Align the short-read library to the genome
 
@@ -29,7 +29,7 @@ This can be done with your chosen aligner but highly sensitive presets are recom
 
 For example with [bbmap](https://github.com/BioInfoTools/BBMap):
 
-```bbmap.sh in1=reads1.fq in2=reads2.fq out=mapped_Reads.sam ref=genome.fasta```
+```bbmap.sh in1=reads1.fq in2=reads2.fq out=mapped_Reads.sam ref=my_genome.fasta```
 
 ### 2. Sort, Index & Convert bam to custom Wig file
 
@@ -50,3 +50,19 @@ Index:
 Run the included script [mpileuptowig.pl](mpileuptowig.pl):
 
 ```samtools mpileup msort.bam | perl mpileuptowig.pl > customwig.mat```
+
+### 4. BLAST the transcripts against the genome
+
+Build a local database:
+
+```makeblastdb -in my_genome.fasta -dbtype nucl -parse_seqids```
+
+Run 'blastn' sequence search with 'output format 6':
+
+```blastn -query transcripts.fa -db my_genome.fasta -evalue 5e-05 -outfmt 6 > blast.outfmt6 ```
+
+### 5. Run the integration and visualisation script
+
+```perl ts_pileup_insight.pl blast.outfmt6 blast customwig.mat```
+
+This will produce one PNG image per unique transcript in the blast output file.
