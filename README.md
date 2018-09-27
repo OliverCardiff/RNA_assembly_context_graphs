@@ -6,6 +6,6 @@ When working with organisms with highly allelically divergent genomes (>5% absol
 
 This short pipeline allows the user to assess the genome assembly circumstance behand the transcript(s) they are interested in.
 
-## The 
+## Running the preparation steps
 
-`samtools mpileup <readmaps.bam> | perl mpileuptowig.pl > customwig.mat
+```samtools mpileup <readmaps.bam> | perl mpileuptowig.pl > customwig.mat```
