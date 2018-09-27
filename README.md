@@ -1,6 +1,6 @@
 # RNAseq Transcript -> Genome Assembly Pileup Context Graphs
 
-A basic system to integrate the separate transcriptomics with a partially assembled genome.
+A system to inform the analysis of stand-alone transcriptomes via a respective difficult-to-assemble genome.
 
 When working with organisms with highly allelically divergent genomes (>5% absolute), it can be difficult to distinguish isoforms from paralogs from alleles in the transcriptome assembly. It is also typically the case that the assembled verison of that organism's genome will be a mish-mash of collapsed and uncollapsed alleles, and in the case of assemblies that collapse aggressively, it may also have substantial paralog collapse misasseblies as a tradeoff.
 
