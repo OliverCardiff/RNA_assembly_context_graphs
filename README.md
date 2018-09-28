@@ -91,8 +91,10 @@ This will produce one PNG, and one PDF image per unique transcript in the blast 
 
 Each image produced will look something like this one:
 
-INSERT IMAGE HERE
+![SampleTS](sample/sample_transcript.png)
 
-Each separate line drawn described a different blast hit found in the genome. The colour of the lines shows the alignment identity. The Y values of the lines show the genomic DNA read pileup at the matched location. X values of the lines show the position along the length of the original transcript which was aligned.
+Each separate line drawn described a different blast hit found in the genome. The colour of the lines shows the alignment identity. The Y values of the lines show the genomic DNA read pileup at the matched location. X values of the lines show the position along the length of the original transcript which was aligned. Many different high identity/similar read-depth lines on top of each-other indicate that either the genome is over inflated, or the transcript assembly is over-collapsed. 
 
-Many different high identity/similar read-depth lines on top of each-other indicate that either the genome is over inflated, or the transcript assembly is over-collapsed. Comparing the read depths in the graphs to the density peaks in the density reference will inform whether the assembly is matching uncollapsed sequence, a well assembled haplome, or over-collapsed repetitive sequence, based on whether the depths are at 1/2 the highest reference density peak, near the highest peak, or substantially higher than it, respectively.
+![refDensity](sample/reference_density.png)
+
+Comparing the read depths in the graphs to the density peaks in the density reference will inform whether the assembly is matching uncollapsed sequence, a well assembled haplome, or over-collapsed repetitive sequence, based on whether the depths are at 1/2 the highest reference density peak, near the highest peak, or substantially higher than it, respectively.
