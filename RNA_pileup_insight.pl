@@ -194,6 +194,7 @@ foreach(@ks)
 	close $outputs{$_};
 }
 
+system("Rscript Draw_images.R *_points.txt");
 
 
 

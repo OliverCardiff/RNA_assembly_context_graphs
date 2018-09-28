@@ -25,11 +25,21 @@ fi
 if [ $4 ]
 then
 
+mkdir $4
+
 makeblastdb -in ${2} -dbtype nucl -parse_seqids
 
-blastn -query ${3} -db ${2} -evalue 5e-05 -outfmt 6 > ${2}.outfmt6
+blastn -query ${3} -db ${2} -evalue 5e-05 -outfmt 6 > ${4}/${2}_blast.outfmt6
 
-perl ts_pileup_insight.pl blast.outfmt6 ${1} 
+rm -f ${2}.*
+
+perl RNA_pileup_insight.pl ${4}/${2}_blast.outfmt6 ${1} $4
+
+awk '{if($2) print $2}' ${1} > temp_wig.mat
+
+Rscript temp_wig.mat $4
+
+rm -f temp_wig.mat
 
 rm -f *_points.txt
 
