@@ -29,17 +29,17 @@ This can be done with your chosen aligner but highly sensitive presets are recom
 
 For example with [bbmap](https://github.com/BioInfoTools/BBMap):
 
-```bbmap.sh in1=reads1.fq in2=reads2.fq out=mapped_Reads.sam ref=my_genome.fasta```
+```bbmap.sh in1=<reads1.fq> in2=<reads2.fq> out=<mapped_reads.sam> ref=<my_genome.fasta>```
 
 ### 2. Sort, Index & Convert bam to custom Wig file
 
 Convert to bam:
 
-```samtools view mapped_reads.sam > mapped_reads.bam```
+```samtools view -bS <mapped_reads.sam> > mapped_reads.bam```
 
 Sort:
 
-```samtools sort -o msort.bam mapped_reads.bam```
+```samtools sort -o <sorted.bam> <mapped_reads.bam>```
 
 Index:
 
@@ -69,21 +69,21 @@ Or, if the above script has been run before, to save a lot of processing time:
 
 Run the included script [mpileuptowig.pl](mpileuptowig.pl):
 
-```samtools mpileup msort.bam | perl mpileuptowig.pl > customwig.mat```
+```samtools mpileup <sorted.bam> | perl mpileuptowig.pl > customwig.mat```
 
 ### 2. BLAST the transcripts against the genome
 
 Build a local database:
 
-```makeblastdb -in my_genome.fasta -dbtype nucl -parse_seqids```
+```makeblastdb -in <my_genome.fasta> -dbtype nucl -parse_seqids```
 
 Run 'blastn' sequence search with 'output format 6':
 
-```blastn -query transcripts.fa -db my_genome.fasta -evalue 5e-05 -outfmt 6 > blast.outfmt6 ```
+```blastn -query <transcripts.fasta> -db <my_genome.fasta> -evalue 5e-05 -outfmt 6 > blast.outfmt6 ```
 
 ### 3. Run the integration and visualisation script
 
-```perl ts_pileup_insight.pl blast.outfmt6 customwig.mat```
+```perl RNA_pileup_insight.pl <blast.outfmt6> <customwig.mat> <outputfile>```
 
 This will produce one PNG, and one PDF image per unique transcript in the blast output file. A kernal read depth density image will also be produced, as an interpretive reference: 'density_reference.png/pdf'
 
