@@ -15,6 +15,13 @@ my $inc = 0;
 
 my @uniqs;
 
+if(scalar(@ARGV) < 3)
+{
+	print "You haven't included all the arguments! Try this:\n";
+	print "perl RNA_pileup_insight.pl <blast.outfmt6> <customwig.mat> <output_folder>\n";
+	die;
+}
+
 
 open BLAST, $ARGV[0] or die $!;
 
@@ -194,7 +201,7 @@ foreach(@ks)
 	close $outputs{$_};
 }
 
-system("Rscript Draw_images.R *_points.txt");
+system("Rscript Draw_images.R " . $ARGV[2] . " *_points.txt");
 
 
 
