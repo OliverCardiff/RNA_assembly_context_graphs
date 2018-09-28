@@ -2,7 +2,7 @@
 
 A system to inform the analysis of stand-alone transcriptomes via a respective difficult-to-assemble genome.
 
-When working with organisms with highly allelically divergent genomes (>5% absolute), it can be difficult to distinguish isoforms from paralogs from alleles in the transcriptome assembly. It is also typically the case that the assembled verison of that organism's genome will be a mish-mash of collapsed and uncollapsed alleles, and in the case of assemblies that collapse aggressively, it may also have substantial paralog collapse misasseblies as a tradeoff.
+When working with organisms with highly allelically divergent genomes (>5% absolute), it can be difficult to distinguish isoforms from paralogs from alleles in the transcriptome assembly. It is also typically the case that the assembled verison of that organism's genome will be a mish-mash of collapsed and uncollapsed alleles, and in the case of assemblies that collapse aggressively, it may also have substantial paralog collapse mis-assemblies as a trade-off.
 
 This short pipeline allows the user to assess the genome assembly circumstance behand the transcript(s) they are interested in.
 
@@ -47,6 +47,14 @@ Index:
 
 ## Running the Pipeline
 
+Retrieve this scripts from git
+
+```git clone https://github.com/OliverCardiff/RNA_assembly_context_graphs.git```
+
+Copy/move the genome, bam file, and transcripts to the RNA_assembly_context_graphs folder created by the above command.
+
+Then enter that folder and do the following:
+
 ### 0. Run the shell script, or manually complete stages (1-3)
 
 This will run the subsequent commands in order:
@@ -77,4 +85,14 @@ Run 'blastn' sequence search with 'output format 6':
 
 ```perl ts_pileup_insight.pl blast.outfmt6 customwig.mat```
 
-This will produce one PNG image per unique transcript in the blast output file.
+This will produce one PNG, and one PDF image per unique transcript in the blast output file. A kernal read depth density image will also be produced, as an interpretive reference: 'density_reference.png/pdf'
+
+## Interpreting the Output
+
+Each image produced will look something like this one:
+
+INSERT IMAGE HERE
+
+Each separate line drawn described a different blast hit found in the genome. The colour of the lines shows the alignment identity. The Y values of the lines show the genomic DNA read pileup at the matched location. X values of the lines show the position along the length of the original transcript which was aligned.
+
+Many different high identity/similar read-depth lines on top of each-other indicate that either the genome is over inflated, or the transcript assembly is over-collapsed. Comparing the read depths in the graphs to the density peaks in the density reference will inform whether the assembly is matching uncollapsed sequence, a well assembled haplome, or over-collapsed repetitive sequence, based on whether the depths are at 1/2 the highest reference density peak, near the highest peak, or substantially higher than it, respectively.
