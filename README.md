@@ -43,7 +43,7 @@ Sort:
 
 Index:
 
-```samtools index msort.bam```
+```samtools index <sorted.bam>```
 
 ## Running the Pipeline
 
